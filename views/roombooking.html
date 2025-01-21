@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>The Bike Hotel</title>
+	<!-- META TAGS -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- FAV ICON(BROWSER TAB ICON) -->
+	<link rel="shortcut icon" href="/images/fav.ico" type="image/x-icon">
+	<!-- GOOGLE FONT -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins%7CQuicksand:500,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=call" />
+	<!-- FONTAWESOME ICONS -->
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<!-- ALL CSS FILES -->
+	<link href="/css/materialize.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
+	<link href="/css/responsive.css" rel="stylesheet">
+</head>
+
+<body data-ng-app="">
+	<!--MOBILE MENU-->
+	<section>
+		<div class="mm">
+			<div class="mm-inn">
+				<div class="mm-logo">
+					<a href="index.html"><img src="images/logo.png" alt="">
+					</a>
+				</div>
+				<div class="mm-icon"><span><i class="fa fa-bars show-menu" aria-hidden="true"></i></span>
+				</div>
+				<div class="mm-menu">
+					<div class="mm-close"><span><i class="fa fa-times hide-menu" aria-hidden="true"></i></span>
+					</div>
+					<ul>
+						<li><a href="/">Home</a>
+						</li>
+						<li><a href="/bookingform">Reservation</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--HEADER SECTION-->
+	<section>
+		<!--TOP SECTION-->
+		<div class="menu-section">
+					<div class="container">
+				<div class="row">
+					<div class="top-bar">
+						<ul>
+							<li><a href="/aboutus">About Us</a>
+							</li>
+							<li><a href="/contactus">Contact Us</a>
+							</li>
+							<li><a href="#">Call us: 254 123 456</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row">
+					<div class="logo">
+						<a href="/"><img src="images/logo.png" alt="" />
+						</a>
+					</div>
+					<div class="menu-bar">
+						<ul>
+							<li><a href="/" class='dropdown-button'>Home</a>
+							</li>
+							<li><a href="/bookingform" class='dropdown-button'>Booking</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--TOP SECTION-->
+		<!--TOP SECTION-->
+		<div class="inn-body-section inn-booking">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="book-form inn-com-form">
+							<form class="col s12 bg-top-booking-form" action="/add-bookinginfo" method="POST" onsubmit="return validateBookingForm()">
+								<div class="row" style="margin-top: 4%;">
+									<div class="page-head">
+										<h2>Booking Form</h2>
+										<br>
+										<div class="head-title">
+											<div class="hl-1"></div>
+											<div class="hl-2"></div>
+											<div class="hl-3"></div>
+										</div>
+										<h5>Life is a journey & Enjoy the ride</h5>
+									</div>
+								</div>
+								<div class="divider-top-booking-form row">
+									<div class="col s12">
+										<div class="col s6"><b>Fist Name</b></div>
+										<div class="col s6"><b>&nbsp;&nbsp;Last Name</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input name="firstName" id="firstName" type="text" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+										<input name="lastName" id="lastName" type="text" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Email</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="email" name="email" id="email" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Phone</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="tel" name="phone" id="phone" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+										<br>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Address</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="text"  name="address" id="address" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s6"><b>City</b></div>
+											<div class="col s6"><b>&nbsp;&nbsp;State</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input type="text" name="city" id="city" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+												<input type="text" name="state" id="state" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<h4>Room requirements</h4>
+								<hr>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Room Type</b></div>
+									</div>
+									<div class="input-field col s12">
+										<select name="roomType" id="roomType" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="0">Standard Room (1 to 2 People) - 150 CAD per night</option>
+											<option value="1">Family Room (1 to 4 People) - 350 CAD per night</option>
+											<option value="2">Private Room (1 to 3 People) - 400 CAD per night</option>
+											<option value="3">Mix Dorm Room (6 People) - 450 CAD per night</option>
+											<option value="4">Female Dorm Room (6 People) - 520 CAD per night </option>
+											<option value="5">Male Dorm Room (6 People) - 520 CAD per night</option>
+										</select>
+									</div>
+								</div>
+								<br>
+								<h4>Scheduled information</h4>
+								<hr>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s6"><b>Number of childrens</b></div>
+										<div class="col s6"><b>&nbsp;&nbsp;Number of Adults</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input type="text" name="numberOfChildren" id="numberOfChildren" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+									  <input type="text" name="numberOfAdults" id="numberOfAdults" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<!-- arrival date & time -->
+										<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Arrival Date</b></div>
+										<div class="col s4"><b>Arrival Time</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Session of the day</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="date" name="arrivalDate" id="arrivalDate" class="form-control userinputcontrols" placeholder="Please Select">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="arrivalTime" id="arrivalTime" class="form-control time-input" placeholder="HH : MM">
+									</div>
+									<div class="input-field col s4">
+									  		<select name="arrivalsessionOfDayArrival" id="arrivalsessionOfDayArrival" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="AM">AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+								</div>
+								<br>
+								<!-- departure date & time -->
+									<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Departure Date</b></div>
+										<div class="col s4"><b>Departure Time</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Session of the day</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="date" name="departureDate" id="departureDate" class="form-control userinputcontrols" placeholder="Please Select">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="departureTime" id="departureTime" class="form-control time-input" placeholder="HH : MM">
+									</div>
+									<div class="input-field col s4">
+									  		<select name="departuresessionOfDayDeparture" id="departuresessionOfDayDeparture" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="AM">AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+								</div>
+									<br>
+								<h4>Payment information</h4>
+								<hr>
+								<!-- payment information -->
+								 	<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Card Number</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="text" name="cardNumber" id="cardNumber" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Experation Date (MM/YY)</b></div>
+										<div class="col s4"><b>CVV (4 digits)</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Postal Code</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="text" name="expirationDate" id="expirationDate" class="form-control userinputcontrols" placeholder="MM/YY">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="cvv" id="cvv" class="form-control time-input">
+									</div>
+									<div class="input-field col s4">
+									  		 <input type="text" name="postalCode" id="postalCode" class="form-control time-input">
+									</div>
+								</div>
+								<br>
+										<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Special Request</b></div>
+									</div>
+									<div class="input-field col s12">
+										<textarea name="specialRequests" id="specialRequests" class="userinputcontrols materialize-textarea" data-length="120"></textarea>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="input-field col s12">
+										<input type="submit" value="submit" class="userinputcontrols form-btn"> </div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!--END TYPOGRAPHY SECTION-->
+				</div>
+			</div>
+		</div>
+		<!--TOP SECTION-->
+		<!--TOP SECTION-->
+	</section>
+	<!--END HEADER SECTION-->
+	<footer class="site-footer clearfix">
+		<div class="sidebar-container">
+			<div class="sidebar-inner">
+				<div class="widget-area clearfix">
+					<div class="widget widget_azh_widget">
+						<div>
+							<div class="container">
+								<div class="row">
+									<div class="col-sm-12 col-md-3 foot-logo"> <img src="/images/logo1.png" alt="logo">
+										<p class="hasimg">Hotels worldwide incl. Infos, Ratings and Photos. Make your Hotel Reservation cheap.</p>
+										<p class="hasimg">The top-rated hotel booking services.</p>
+									</div>
+									<div class="col-sm-12 col-md-3">
+										<h4>Support &amp; Help</h4>
+										<ul class="two-columns">
+											<li><a href="/bookingform">Booking</a>
+											</li>
+											<li><a href="/contactus">Contact Us</a>
+											</li>
+											<li><a href="/aboutus">About Us</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-sm-12 col-md-3">
+										<h4>Cities Covered</h4>
+										<ul class="two-columns">
+											<li><a href="#!">Sydney</a>
+											</li>
+											<li><a href="#!">Basel</a>
+											</li>
+											<li><a href="#!">Copenhagen</a>
+											</li>
+											<li><a href="#!">Frankfurt</a>
+											</li>
+											<li><a href="#!">Vancouver</a>
+											</li>
+											<li><a href="#!">Auckland</a>
+											</li>
+											<li><a href="#!">Vienna</a>
+											</li>
+											<li><a href="#!">Los Angeles</a>
+											</li>
+										</ul>
+									</div>
+									<div class="col-sm-12 col-md-3">
+										<h4>Address</h4>
+										<p>28800 Orchard Lake Road, Suite 180 Farmington Hills, U.S.A. Landmark : Next To Airport</p>
+										<p> <span class="foot-phone">Phone: </span> <span class="foot-phone">+01 1245 2541</span> </p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="foot-sec2">
+							<div class="container">
+								<div class="row">
+									<div class="col-sm-12 col-md-5 foot-social">
+										<h4>Follow with us</h4>
+										<p>Join the thousands of other There are many variations of passages of Lorem Ipsum available</p>
+										<ul>
+											<li><a href="#!"><i class="fa fa-facebook" aria-hidden="true"></i></a> </li>
+											<li><a href="#!"><i class="fa fa-google-plus" aria-hidden="true"></i></a> </li>
+											<li><a href="#!"><i class="fa fa-twitter" aria-hidden="true"></i></a> </li>
+											<li><a href="#!"><i class="fa fa-linkedin" aria-hidden="true"></i></a> </li>
+											<li><a href="#!"><i class="fa fa-youtube" aria-hidden="true"></i></a> </li>
+											<li><a href="#!"><i class="fa fa-whatsapp" aria-hidden="true"></i></a> </li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- .widget-area -->
+			</div>
+			<!-- .sidebar-inner -->
+		</div>
+		<!-- #quaternary -->
+	</footer>
+	<section class="copy">
+		<div class="container">
+			<p>copyrights © 2025</p>
+		</div>
+	</section>
+	<section>
+		<!-- LOGIN SECTION -->
+		<div id="modal1" class="modal fade" role="dialog">
+			<div class="log-in-pop">
+				<div class="log-in-pop-left">
+					<h1>Hello... <span>{{ name }}</span></h1>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<h4>Login with social media</h4>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+						</li>
+						<li><a href="#"><i class="fa fa-google"></i> Google+</a>
+						</li>
+						<li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+						</li>
+					</ul>
+				</div>
+				<div class="log-in-pop-right">
+					<a href="#" class="pop-close" data-dismiss="modal"><img src="/images/cancel.png" alt="" />
+					</a>
+					<h4>Login</h4>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<form class="s12">
+						<div>
+							<div class="input-field s12">
+								<input type="text" data-ng-model="name" class="validate">
+								<label>User name</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s12">
+								<input type="password" class="validate">
+								<label>Password</label>
+							</div>
+						</div>
+						<div>
+							<div class="s12 log-ch-bx">
+								<p>
+									<input type="checkbox" id="test5" />
+									<label for="test5">Remember me</label>
+								</p>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s4">
+								<input type="submit" value="Login" class="waves-effect waves-light log-in-btn"> </div>
+						</div>
+						<div>
+							<div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal3">Forgot password</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- REGISTER SECTION -->
+		<div id="modal2" class="modal fade" role="dialog">
+			<div class="log-in-pop">
+				<div class="log-in-pop-left">
+					<h1>Hello... <span>{{ name1 }}</span></h1>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<h4>Login with social media</h4>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+						</li>
+						<li><a href="#"><i class="fa fa-google"></i> Google+</a>
+						</li>
+						<li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+						</li>
+					</ul>
+				</div>
+				<div class="log-in-pop-right">
+					<a href="#" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
+					</a>
+					<h4>Create an Account</h4>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<form class="s12">
+						<div>
+							<div class="input-field s12">
+								<input type="text" data-ng-model="name1" class="validate">
+								<label>User name</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s12">
+								<input type="email" class="validate">
+								<label>Email id</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s12">
+								<input type="password" class="validate">
+								<label>Password</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s12">
+								<input type="password" class="validate">
+								<label>Confirm password</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s4">
+								<input type="submit" value="Register" class="waves-effect waves-light log-in-btn"> </div>
+						</div>
+						<div>
+							<div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- FORGOT SECTION -->
+		<div id="modal3" class="modal fade" role="dialog">
+			<div class="log-in-pop">
+				<div class="log-in-pop-left">
+					<h1>Hello... <span>{{ name3 }}</span></h1>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<h4>Login with social media</h4>
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+						</li>
+						<li><a href="#"><i class="fa fa-google"></i> Google+</a>
+						</li>
+						<li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+						</li>
+					</ul>
+				</div>
+				<div class="log-in-pop-right">
+					<a href="#" class="pop-close" data-dismiss="modal"><img src="images/cancel.png" alt="" />
+					</a>
+					<h4>Forgot password</h4>
+					<p>Don't have an account? Create your account. It's take less then a minutes</p>
+					<form class="s12">
+						<div>
+							<div class="input-field s12">
+								<input type="text" data-ng-model="name3" class="validate">
+								<label>User name or email id</label>
+							</div>
+						</div>
+						<div>
+							<div class="input-field s4">
+								<input type="submit" value="Submit" class="waves-effect waves-light log-in-btn"> </div>
+						</div>
+						<div>
+							<div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--ALL SCRIPT FILES-->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/js/materialize.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.mixitup.min.js" type="text/javascript"></script>
+	<script src="/js/custom.js"></script>
+	<script src="js/validuserinputs.js"></script>
+</body>
+
+</html>

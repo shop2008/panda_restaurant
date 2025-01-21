@@ -1,0 +1,113 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <main>
+        <div class="hom-body-section">
+			<div class="container">
+				<div class="row">
+			<div class="container">
+				<div class="row">
+					<div class="page-head">
+						<h2>Reservation Search</h2>
+						<div class="head-title">
+							<div class="hl-1"></div>
+							<div class="hl-2"></div>
+							<div class="hl-3"></div>
+						</div>
+						<!-- SEARCH CONTROL -->
+						 <div class="col-md-12">
+						<div class="head-typo typo-com collap-expand book-form inn-com-form">
+							<form class="col s12" action="/filter-reservations" method="POST" onsubmit="return validateSearchInput()">
+								<div class="row">
+										<b style="float: left; margin-left: 6px;">Search by Guest Name</b>
+										<div class="input-field col s12"> 
+										<input type="text" class="validate" id="guestName" name="guestName">
+										<label>Search ...</label>
+										<!-- <i style="margin-top: 15px;" class="material-icons prefix">search</i> -->
+									</div>
+											<div class="input-field col s12"> 
+													<button type="submit" class="btn" style="margin-top: 5px;">
+											<i class="material-icons">search</i>
+											Search
+									</button>
+												</div>
+												<div class="input-field col s12"> 
+												<h5>Found <%= confirmationData && Array.isArray(confirmationData) ? confirmationData.length : 0 %> 
+													Results for reservations <%= typeof keywords !== 'undefined' && keywords ? '(' + keywords + ')' : '' %></h5>
+						
+													</div>
+									 </div>
+							</form>
+						<h5>
+							<br>
+								<br>
+									<br>
+						
+						</div>
+					</div>
+						 <!-- END SEARCH CONTROL  -->
+					</div>
+				</div>
+			</div>
+			<% if(typeof confirmationData !== 'undefined' && confirmationData !== null ) { %>
+								<% if (confirmationData.length > 0) { %>
+				<!-- create a dynamic table  -->
+				 <div class="row">
+					<!--TYPOGRAPHY SECTION-->
+					<div class="col-md-12">
+						<div class="head-typo typo-com" style="overflow-x: scroll;">
+							<h2>Reservation Data</h2>
+							<table class="table table-bordered">
+								<thead>
+								<tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Total Guests</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Total</th>
+                    <th>Room Type</th>
+										<th>Requests</th>
+                </tr>
+								</thead>
+								<tbody>
+							<% let count = 1; %>
+							<% confirmationData.forEach(function(bookingData) { %>
+									<tr>
+											<td><%= bookingData.booking_id %></td>
+											<td><%= bookingData.first_name %> <%= bookingData.last_name %></td>
+											<td><%= bookingData.email %></td>
+											<td><%= bookingData.phone %></td>
+											<td><%= bookingData.address %></td>
+											<td><%= bookingData.city %></td>
+											<td><%= bookingData.state %></td>
+											<td><%= bookingData.num_children %> children & <%= bookingData.num_adults %> adults</td>
+											<td><%= bookingData.arrival_date %> <%= bookingData.arrival_time %> <%= bookingData.session_arrival %></td>
+											<td><%= bookingData.departure_date %> <%= bookingData.departure_time %> <%= bookingData.session_departure %></td>
+											<td>$<%= bookingData.price_per_night %></td>
+											<td><%= bookingData.room_type %></td>
+												<td><%= bookingData.special_request %></td>
+									</tr>
+									<% count++; %>
+							<% }); %>
+							</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<% } else { %>
+				<h4>Cannot found any search results</h4>
+		<% } %>
+				 <!-- end table -->
+		<% } %>
+				</div>
+			</div>
+		</div>
+    </main>
+    <%- include('includes/end.ejs') %>

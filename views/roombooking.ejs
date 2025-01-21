@@ -1,0 +1,209 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navigation.ejs') %>
+		<!-- checking are there any error-->
+				<% if (hasErrorInsertedData) { %>
+				 <script>
+        		alert("There is some error in making the reservation, please try again!");
+    		</script>
+				<% } %>
+    <div class="inn-body-section inn-booking">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="book-form inn-com-form">
+							<form class="col s12 bg-top-booking-form" action="/add-bookinginfo" method="POST" onsubmit="return validateBookingForm()">
+								<div class="row" style="margin-top: 4%;">
+									<div class="page-head">
+										<h2>Booking Form</h2>
+										<br>
+										<div class="head-title">
+											<div class="hl-1"></div>
+											<div class="hl-2"></div>
+											<div class="hl-3"></div>
+										</div>
+										<h5>Life is a journey & Enjoy the ride</h5>
+									</div>
+								</div>
+								<div class="divider-top-booking-form row">
+									<div class="col s12">
+										<div class="col s6"><b>Fist Name</b></div>
+										<div class="col s6"><b>&nbsp;&nbsp;Last Name</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input name="firstName" id="firstName" type="text" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+										<input name="lastName" id="lastName" type="text" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Email</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="email" name="email" id="email" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Phone</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="tel" name="phone" id="phone" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+										<br>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Address</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="text"  name="address" id="address" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col s12">
+										<div class="col s6"><b>City</b></div>
+											<div class="col s6"><b>&nbsp;&nbsp;State</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input type="text" name="city" id="city" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+												<input type="text" name="state" id="state" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<h4>Room requirements</h4>
+								<hr>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Room Type</b></div>
+									</div>
+									<div class="input-field col s12">
+										<select name="roomType" id="roomType" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="0">Standard Room (1 to 2 People) - 150 CAD per night</option>
+											<option value="1">Family Room (1 to 4 People) - 350 CAD per night</option>
+											<option value="2">Private Room (1 to 3 People) - 400 CAD per night</option>
+											<option value="3">Mix Dorm Room (6 People) - 450 CAD per night</option>
+											<option value="4">Female Dorm Room (6 People) - 520 CAD per night </option>
+											<option value="5">Male Dorm Room (6 People) - 520 CAD per night</option>
+										</select>
+									</div>
+								</div>
+								<br>
+								<h4>Scheduled information</h4>
+								<hr>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s6"><b>Number of childrens</b></div>
+										<div class="col s6"><b>&nbsp;&nbsp;Number of Adults</b></div>
+									</div>
+									<div class="input-field col s6">
+										<input type="text" name="numberOfChildren" id="numberOfChildren" class="form-control validate userinputcontrols">
+									</div>
+									<div class="input-field col s6">
+									  <input type="text" name="numberOfAdults" id="numberOfAdults" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+								<!-- arrival date & time -->
+										<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Arrival Date</b></div>
+										<div class="col s4"><b>Arrival Time</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Session of the day</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="date" name="arrivalDate" id="arrivalDate" class="form-control userinputcontrols" placeholder="Please Select">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="arrivalTime" id="arrivalTime" class="form-control time-input" placeholder="HH : MM">
+									</div>
+									<div class="input-field col s4">
+									  		<select name="arrivalsessionOfDayArrival" id="arrivalsessionOfDayArrival" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="AM">AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+								</div>
+								<br>
+								<!-- departure date & time -->
+									<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Departure Date</b></div>
+										<div class="col s4"><b>Departure Time</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Session of the day</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="date" name="departureDate" id="departureDate" class="form-control userinputcontrols" placeholder="Please Select">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="departureTime" id="departureTime" class="form-control time-input" placeholder="HH : MM">
+									</div>
+									<div class="input-field col s4">
+									  		<select name="departuresessionOfDayDeparture" id="departuresessionOfDayDeparture" class="userinputcontrols">
+											<option value="" disabled selected>Please Select</option>
+											<option value="AM">AM</option>
+											<option value="PM">PM</option>
+										</select>
+									</div>
+								</div>
+									<br>
+								<h4>Payment information</h4>
+								<hr>
+								<!-- payment information -->
+								 	<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Card Number</b></div>
+									</div>
+									<div class="input-field col s12">
+										<input type="text" name="cardNumber" id="cardNumber" class="form-control validate userinputcontrols">
+									</div>
+								</div>
+								<br>
+									<div class="row">
+									<div class="col s12">
+										<div class="col s4"><b>Experation Date (MM/YY)</b></div>
+										<div class="col s4"><b>CVV (4 digits)</b></div>
+										<div class="col s4"><b>&nbsp;&nbsp;&nbsp;Postal Code</b></div>
+									</div>
+									<div class="input-field col s4">
+										<input type="text" name="expirationDate" id="expirationDate" class="form-control userinputcontrols" placeholder="MM/YY">
+									</div>
+										<div class="input-field col s4">
+									  	 <input type="text" name="cvv" id="cvv" class="form-control time-input">
+									</div>
+									<div class="input-field col s4">
+									  		 <input type="text" name="postalCode" id="postalCode" class="form-control time-input">
+									</div>
+								</div>
+								<br>
+										<div class="row">
+									<div class="col s12">
+										<div class="col s12"><b>Special Request</b></div>
+									</div>
+									<div class="input-field col s12">
+										<textarea name="specialRequests" id="specialRequests" class="userinputcontrols materialize-textarea" data-length="120"></textarea>
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="input-field col s12">
+										<input type="submit" value="submit" class="userinputcontrols form-btn"> </div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!--END TYPOGRAPHY SECTION-->
+				</div>
+			</div>
+		</div>
+    <%- include('includes/end.ejs') %>
