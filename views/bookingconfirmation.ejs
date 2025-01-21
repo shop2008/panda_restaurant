@@ -1,79 +1,86 @@
 <%- include('includes/head.ejs') %>
-</head>
-<body>
-    <%- include('includes/navigation.ejs') %>
-    <main>
-        <div class="hom-body-section">
-			<div class="container">
-				<div class="row">
-			<div class="container">
-				<div class="row">
-					<div class="page-head">
-					
-						<h2>Booking Confirmed</h2>
-						<div class="head-title">
-							<div class="hl-1"></div>
-							<div class="hl-2"></div>
-							<div class="hl-3"></div>
+	</head>
+
+	<body>
+		<%- include('includes/navigation.ejs') %>
+			<main>
+				<div class="hom-body-section">
+					<div class="container">
+						<div class="row">
+							<div class="page-head">
+								<h2>Booking Confirmed</h2>
+								<div class="head-title">
+									<div class="hl-1"></div>
+									<div class="hl-2"></div>
+									<div class="hl-3"></div>
+								</div>
+								<p class="content">
+									We are pleased to inform you that your restaurant reservation request has been
+									received and confirmed.
+									<br><br>
+									<img src="/images/logo1.png">
+									<br>
+									Your booking is confirmed. Thank You!
+								</p>
+							</div>
 						</div>
-						 <p class="content">
-							We are pleased to inform you that your reservation request has been received and confirmed.
-							<br><br>
-								<img src="/images/logo1.png">
-							<br>
-							Your booking is confirmed. Thank You!
-    					</p>
-					</div>
-				</div>
-			</div>
-	
-		 			<% let count = 1 %>
-					  <% if (confirmationData.length > 0) { %>
-            <table class="table table-bordered">
+
+						<% if (confirmationData) { %>
+							<table class="table table-bordered">
 								<thead>
-								<tr>
-                    <th>Booking ID</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Total Guests</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Room Type</th>
-                </tr>
+									<tr>
+										<th>Booking ID</th>
+										<th>Full Name</th>
+										<th>Email</th>
+										<th>Phone</th>
+										<th>Number of Guests</th>
+										<th>Date</th>
+										<th>Time</th>
+										<th>Table Type</th>
+										<th>Special Requests</th>
+										<th>Status</th>
+									</tr>
 								</thead>
 								<tbody>
-							<% let count = 1; %>
-							<% confirmationData.forEach(function(bookingData) { %>
 									<tr>
-											<td><%= bookingData.booking_id %></td>
-											<td><%= bookingData.first_name %> <%= bookingData.last_name %></td>
-											<td><%= bookingData.email %></td>
-											<td><%= bookingData.phone %></td>
-											<td><%= bookingData.address %></td>
-											<td><%= bookingData.city %></td>
-											<td><%= bookingData.state %></td>
-											<td><%= bookingData.number_of_children %> children & <%= bookingData.number_of_adults %> adults</td>
-											<td><%= bookingData.arrival_date %> <%= bookingData.arrival_time %> <%= bookingData.session_arrival %></td>
-											<td><%= bookingData.departure_date %> <%= bookingData.departure_time %> <%= bookingData.session_departure %></td>
-											<td>$<%= bookingData.price_per_night %></td>
-											<td>Confirmed</td>
-											<td><%= bookingData.room_type %></td>
+										<td>
+											<%= confirmationData.booking_id %>
+										</td>
+										<td>
+											<%= confirmationData.first_name %>
+												<%= confirmationData.last_name %>
+										</td>
+										<td>
+											<%= confirmationData.email %>
+										</td>
+										<td>
+											<%= confirmationData.phone %>
+										</td>
+										<td>
+											<%= confirmationData.number_of_guests %>
+										</td>
+										<td>
+											<%= confirmationData.date.toLocaleDateString() %>
+										</td>
+										<td>
+											<%= confirmationData.time %>
+										</td>
+										<td>
+											<%= confirmationData.table_type %>
+										</td>
+										<td>
+											<%= confirmationData.special_requests || 'None' %>
+										</td>
+										<td>
+											<%= confirmationData.status %>
+										</td>
 									</tr>
-									<% count++; %>
-							<% }); %>
-							</tbody>
+								</tbody>
 							</table>
-        <% } else { %>
-            <h1>No Booking Data!</h1>
-        <% } %>
+							<% } else { %>
+								<h3>No Booking Data!</h3>
+								<% } %>
+					</div>
 				</div>
-			</div>
-		</div>
-    </main>
-    <%- include('includes/end.ejs') %>
+			</main>
+			<%- include('includes/end.ejs') %>
