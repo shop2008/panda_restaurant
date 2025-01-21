@@ -101,7 +101,7 @@ exports.postAddBookingData = async (req, res, next) => {
     req.body.numberOfGuests,
     formatDate(req.body.date),
     req.body.time,
-    req.body.tableType,
+    tableDetails.tableType,
     req.body.specialRequests || null // Make special requests optional
   );
 
