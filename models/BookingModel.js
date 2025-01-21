@@ -1,49 +1,133 @@
+const BaseModel = require('./BaseModel');
 const db = require('../utils/database');
 
-module.exports = class BookingModel {
-  // Constructor
-  constructor(
-    firstName,
-    lastName,
-    email,
-    phone,
-    numberOfGuests,
-    date,
-    time,
-    tableType,
-    specialRequests
-  ) {
-    this.bookingId = null;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.phone = phone;
-    this.numberOfGuests = numberOfGuests;
-    this.date = date;
-    this.time = time;
-    this.tableType = tableType;
-    this.specialRequests = specialRequests;
+class BookingModel extends BaseModel {
+  #bookingId;
+  #firstName;
+  #lastName;
+  #email;
+  #phone;
+  #numberOfGuests;
+  #date;
+  #time;
+  #tableType;
+  #specialRequests;
+  #status;
+
+  constructor(bookingData) {
+    super();
+    this.#bookingId = null;
+    this.#firstName = bookingData.firstName;
+    this.#lastName = bookingData.lastName;
+    this.#email = bookingData.email;
+    this.#phone = bookingData.phone;
+    this.#numberOfGuests = bookingData.numberOfGuests;
+    this.#date = bookingData.date;
+    this.#time = bookingData.time;
+    this.#tableType = bookingData.tableType;
+    this.#specialRequests = bookingData.specialRequests;
+    this.#status = 'Confirmed';
+  }
+
+  // Getters and setters
+  get bookingId() {
+    return this.#bookingId;
+  }
+  get firstName() {
+    return this.#firstName;
+  }
+  set firstName(value) {
+    this.#firstName = value;
+  }
+  get lastName() {
+    return this.#lastName;
+  }
+  set lastName(value) {
+    this.#lastName = value;
+  }
+  get email() {
+    return this.#email;
+  }
+  set email(value) {
+    this.#email = value;
+  }
+  get phone() {
+    return this.#phone;
+  }
+  set phone(value) {
+    this.#phone = value;
+  }
+  get numberOfGuests() {
+    return this.#numberOfGuests;
+  }
+  set numberOfGuests(value) {
+    this.#numberOfGuests = value;
+  }
+  get date() {
+    return this.#date;
+  }
+  set date(value) {
+    this.#date = value;
+  }
+  get time() {
+    return this.#time;
+  }
+  set time(value) {
+    this.#time = value;
+  }
+  get tableType() {
+    return this.#tableType;
+  }
+  set tableType(value) {
+    this.#tableType = value;
+  }
+  get specialRequests() {
+    return this.#specialRequests;
+  }
+  set specialRequests(value) {
+    this.#specialRequests = value;
+  }
+  get status() {
+    return this.#status;
+  }
+  set status(value) {
+    this.#status = value;
   }
 
   async save() {
     const bookingResult = await db.execute(
       'INSERT INTO BOOKING (first_name, last_name, email, phone, number_of_guests, date, time, table_type, special_requests, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       [
-        this.firstName,
-        this.lastName,
-        this.email,
-        this.phone,
-        this.numberOfGuests,
-        this.date,
-        this.time,
-        this.tableType,
-        this.specialRequests,
-        'Confirmed',
+        this.#firstName,
+        this.#lastName,
+        this.#email,
+        this.#phone,
+        this.#numberOfGuests,
+        this.#date,
+        this.#time,
+        this.#tableType,
+        this.#specialRequests,
+        this.#status,
       ]
     );
+    this.#bookingId = bookingResult[0].insertId ?? null;
+    return this.#bookingId;
+  }
 
-    this.bookingId = bookingResult[0].insertId ?? null;
-    return this.bookingId;
+  toJSON() {
+    return {
+      bookingId: this.#bookingId,
+      firstName: this.#firstName,
+      lastName: this.#lastName,
+      email: this.#email,
+      phone: this.#phone,
+      numberOfGuests: this.#numberOfGuests,
+      date: this.#date,
+      time: this.#time,
+      tableType: this.#tableType,
+      specialRequests: this.#specialRequests,
+      status: this.#status,
+    };
   }
 
   // Method to fecth booking data by booking id
@@ -79,4 +163,6 @@ module.exports = class BookingModel {
 
     return results[0]?.length > 0 ? results[0] : null;
   }
-};
+}
+
+module.exports = BookingModel;
