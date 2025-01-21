@@ -1,86 +1,62 @@
 function validateSearchInput() {
   const searchContent = document.getElementById('guestName').value.trim();
   if (searchContent === '') {
-    alert("Please type your keywords to search!");
+    alert('Please type your keywords to search!');
     return false;
   }
   return true;
 }
 
-
 function validateBookingForm() {
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
   const email = document.getElementById('email').value.trim();
-  const numberOfChildren = document.getElementById('numberOfChildren').value.trim();
-  const numberOfAdults = document.getElementById('numberOfAdults').value.trim();
-  const arrivalTime = document.getElementById('arrivalTime').value.trim();
-  const roomType = document.getElementById('roomType').value.trim();
-  const totalchildren = document.getElementById('numberOfChildren').value.trim();
-  const totaladults = document.getElementById('numberOfAdults').value.trim();
+  const numberOfGuests = document.getElementById('numberOfGuests').value.trim();
+  const date = document.getElementById('date').value.trim();
+  const time = document.getElementById('time').value.trim();
+  const tableType = document.getElementById('tableType').value.trim();
 
-  // Check if any of the required fields are empty
-  if (!firstName || !lastName || !email || !numberOfChildren || !numberOfAdults || !arrivalTime) {
+  // Check if required fields are empty
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !numberOfGuests ||
+    !date ||
+    !time ||
+    !tableType
+  ) {
     alert('Please fill out all required fields.');
     return false;
   }
 
-  // check the number of people in each room
-  if (totalchildren !== null && totaladults !== null) {
-    const totalPeople = parseInt(totaladults, 10) + parseInt(totalchildren, 10);
-    switch (parseInt(roomType, 10)) {
-      case 0:
-        if (totalPeople > 2) {
-          alert(`Maximum capacity for Standard Room is 2. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-
-      case 1:
-        if (totalPeople > 4) {
-          alert(`Maximum capacity for Family Room is 4. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-      case 2:
-        if (totalPeople > 3) {
-          alert(`Maximum capacity for Private Room is 3. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-      case 3:
-        if (totalPeople > 6) {
-          alert(`Maximum capacity for Mix Dorm Room is 6. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-      case 4:
-        if (totalPeople > 6) {
-          alert(`Maximum capacity for Female Dorm Room is 6. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-      case 5:
-        if (totalPeople > 6) {
-          alert(`Maximum capacity for Male Dorm Room is 6. You have ${totalPeople} people.`);
-          return false;
-        } else {
-          return true;
-        }
-      default:
+  // Validate number of guests based on table type
+  const guests = parseInt(numberOfGuests, 10);
+  switch (tableType) {
+    case '0': // Two-seater
+      if (guests > 2) {
+        alert('Two-seater table can only accommodate up to 2 guests');
         return false;
-    }
-  }
-
-  // Check if numbers of children and adults are valid integers
-  if (!Number.isInteger(+numberOfChildren) || !Number.isInteger(+numberOfAdults)) {
-    alert('Number of children and adults must be a valid number.');
-    return false;
+      }
+      break;
+    case '1': // Four-seater
+      if (guests > 4) {
+        alert('Four-seater table can only accommodate up to 4 guests');
+        return false;
+      }
+      break;
+    case '2': // Six-seater
+      if (guests > 6) {
+        alert('Six-seater table can only accommodate up to 6 guests');
+        return false;
+      }
+      break;
+    case '3': // Large group
+      if (guests > 12) {
+        alert('Large group tables can accommodate up to 12 guests');
+        return false;
+      }
+      break;
   }
 
   // Validate email format
@@ -90,7 +66,7 @@ function validateBookingForm() {
   }
 
   // Validate time format (HH:MM)
-  if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(arrivalTime)) {
+  if (!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(time)) {
     alert('Please enter a valid time in HH:MM format.');
     return false;
   }
