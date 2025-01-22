@@ -18,7 +18,7 @@
 									We are pleased to inform you that your restaurant reservation request has been
 									received and confirmed.
 									<br><br>
-									<img src="/images/logo1.png">
+									<img style="width: 128px; height: 128px;" src="/images/logo1.png">
 									<br>
 									Your booking is confirmed. Thank You!
 								</p>
@@ -60,10 +60,10 @@
 											<%= confirmationData.number_of_guests %>
 										</td>
 										<td>
-											<%= confirmationData.date.toLocaleDateString() %>
+											<%= confirmationData.date ? confirmationData.date.toLocaleDateString() : 'No Date Provided' %>
 										</td>
 										<td>
-											<%= confirmationData.time %>
+											<%= confirmationData.time || 'No Time Provided' %>
 										</td>
 										<td>
 											<%= confirmationData.table_type %>

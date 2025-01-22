@@ -1,3 +1,4 @@
+//Using abstraction
 class BaseModel {
   constructor() {
     if (this.constructor === BaseModel) {
@@ -16,6 +17,7 @@ class BaseModel {
   static async fetchAll() {
     throw new Error("Method 'fetchAll()' must be implemented.");
   }
+
 }
 
 module.exports = BaseModel;

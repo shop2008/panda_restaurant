@@ -6,7 +6,7 @@ class BaseController {
   }
 
   // Base render method that all controllers can use
-  render(res, view, options = {}) {
+  async render(res, view, options = {}) {
     const defaultOptions = {
       pageTitle: 'Default Title',
       path: '/',
@@ -16,7 +16,7 @@ class BaseController {
     res.render(view, defaultOptions);
   }
 
-  // Common error handling
+  // Polymorphism
   handleError(error, req, res, next) {
     console.error('Controller Error:', error);
     next(error);

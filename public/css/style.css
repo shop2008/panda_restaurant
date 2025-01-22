@@ -195,6 +195,7 @@ th {
 }
 .top-bar {
     float: right;
+    margin-top: 18px;
 }
 .top-bar ul {
     padding: 0px;
@@ -206,7 +207,7 @@ th {
 .top-bar ul li a {
     color: white;
     font-size: 12px;
-    border-right: 1px solid #474747;
+    border-right: 1px solid #fff;
     padding: 0px 10px;
     text-transform: initial;
     font-family: 'Quicksand', sans-serif;
@@ -215,11 +216,11 @@ th {
     width: 18px;
 }
 .menu-section {
-    padding: 10px 0px;
+    padding: 2px 0px;
 background: #4b6cb7;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to left, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to left, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+ max-height: 70px;
     position: fixed;
     width: 100%;
     z-index: 999;
@@ -227,17 +228,19 @@ background: linear-gradient(to left, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Fi
 }
 .logo {
     float: left;
-    width: 20%;
+    width: 60%;
 }
 .logo img {} .menu-bar {
     float: left;
-    width: 80%;
+    width: 40%;
+    color: white;
+    margin-top: 10px;
 }
 .menu-bar ul {
     padding: 0px;
     margin-bottom: 0px;
     float: right;
-    margin-top: 12px;
+        color: white;
 }
 .menu-bar ul li {
     display: inline-block;
@@ -312,7 +315,7 @@ background: linear-gradient(to left, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Fi
 }
 .home-bod-1 p {
      font-size: 14px;
-    color: #d9d9d9;
+   color: #fff;
         padding: 10px;
 }
 .home-bod-2 {} .home-bod-2 ul {

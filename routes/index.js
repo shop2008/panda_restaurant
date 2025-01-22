@@ -6,6 +6,8 @@ const rootDir = require('../utils/path');
 
 const bookingController = require('../controllers/bookingController');
 
+const SearchController = require('../controllers/searchController');
+
 const router = express.Router();
 
 // ============================= HANDLE GET REQUESTS FROM CLIENT ====================
@@ -70,7 +72,7 @@ router.post(
 // handle to redirect to booking page
 router.post(
   '/filter-reservations',
-  bookingController.getFilteredBookings.bind(bookingController)
+  SearchController.getFilteredBookings.bind(SearchController)
 );
 
 module.exports = router;

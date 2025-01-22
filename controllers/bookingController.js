@@ -1,40 +1,55 @@
 const BaseController = require('./BaseController');
 const BookingInfo = require('../models/BookingModel');
+const path = require('../utils/path');
 
 class BookingController extends BaseController {
   constructor() {
     super();
   }
 
+  // Polymorphism
+  async render(res, view, options = {}) {
+    try {
+      let allDataRows = null;
+
+      if (options.usingSearchByID === false) {
+        allDataRows = await BookingInfo.fetchAll();
+      } else {
+        allDataRows = await BookingInfo.fetchById(options.BookingId);
+      }
+
+      console.log("=== Call render method in bookingController ========")
+      console.log(allDataRows)
+      console.log("=====================================================")
+
+      // Ensure options are correctly used and structured
+      super.render(res, view, {
+        confirmationData: allDataRows,
+        pageTitle: 'All Reservations',
+        path: options.path,
+        usingSearchFunction: false
+      });
+
+    } catch (error) {
+      this.handleError(error, null, res, null);
+    }
+  }
+
   async getAllBookings(req, res, next) {
     try {
-      const alldatarows = await BookingInfo.fetchAll();
-      this.render(res, 'reservationsearch', {
-        confirmationData: alldatarows,
-        pageTitle: 'All Reservations',
-        path: '/reservationsearch',
-        UsingSearchFunction: false,
-      });
+      // call render method in this sub-class
+      this.render(res, 'reservationsearch', { usingSearchByID: false, path: '/reservationsearch' });
+
     } catch (error) {
       this.handleError(error, req, res, next);
     }
   }
 
-  async getFilteredBookings(req, res, next) {
-    try {
-      const guestName = req.body.guestName;
-      const filteredBookings = await BookingInfo.filterByGuestName(guestName);
-
-      this.render(res, 'reservationsearch', {
-        confirmationData: filteredBookings || null,
-        pageTitle: 'Filtered Reservations',
-        path: '/getAllBookings',
-        UsingSearchFunction: true,
-        keywords: guestName,
-      });
-    } catch (error) {
-      this.handleError(error, req, res, next);
-    }
+  // Polymorphism
+  handleError(error, req, res, next) {
+    // Implement error handling, possibly logging and sending a HTTP error response
+    console.error(error);
+    res.status(500).send('Something wrong with get booking data!');
   }
 
   async postAddBookingData(req, res, next) {
@@ -75,12 +90,9 @@ class BookingController extends BaseController {
         throw new Error('Failed to save booking');
       }
 
-      const bookingRow = await BookingInfo.fetchById(bookingId);
-      this.render(res, 'bookingconfirmation', {
-        confirmationData: bookingRow,
-        pageTitle: 'Booking Confirmation Page',
-        path: '/bookingconfirmation',
-      });
+      // go to confirmation page 
+      this.render(res, 'bookingconfirmation', { usingSearchByID: true, BookingId: bookingId, path: 'bookingconfirmation' });
+
     } catch (error) {
       this.handleError(error, req, res, next);
     }

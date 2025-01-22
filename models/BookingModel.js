@@ -1,6 +1,7 @@
 const BaseModel = require('./BaseModel');
 const db = require('../utils/database');
 
+// Using Encapsulation and Inheritance features
 class BookingModel extends BaseModel {
   #bookingId;
   #firstName;
