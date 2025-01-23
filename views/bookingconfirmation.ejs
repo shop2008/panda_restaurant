@@ -25,7 +25,7 @@
 							</div>
 						</div>
 
-						<% if (confirmationData) { %>
+						<% if (ViewContent) { %>
 							<table class="table table-bordered">
 								<thead>
 									<tr>
@@ -41,41 +41,11 @@
 										<th>Status</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<%= confirmationData.booking_id %>
-										</td>
-										<td>
-											<%= confirmationData.first_name %>
-												<%= confirmationData.last_name %>
-										</td>
-										<td>
-											<%= confirmationData.email %>
-										</td>
-										<td>
-											<%= confirmationData.phone %>
-										</td>
-										<td>
-											<%= confirmationData.number_of_guests %>
-										</td>
-										<td>
-											<%= confirmationData.date ? confirmationData.date.toLocaleDateString() : 'No Date Provided' %>
-										</td>
-										<td>
-											<%= confirmationData.time || 'No Time Provided' %>
-										</td>
-										<td>
-											<%= confirmationData.table_type %>
-										</td>
-										<td>
-											<%= confirmationData.special_requests || 'None' %>
-										</td>
-										<td>
-											<%= confirmationData.status %>
-										</td>
-									</tr>
-								</tbody>
+									<!-- the area for table body -->
+													 <tbody>
+															<%- ViewContent %>
+													 </tbody>
+													<!-- end -->
 							</table>
 							<% } else { %>
 								<h3>No Booking Data!</h3>

@@ -7,6 +7,10 @@ class ViewController {
     if (data) {
       let html = '';
 
+      if (!Array.isArray(data)) {
+        data = [data];
+      }
+
       data.forEach(booking => {
         html += `<tr>
                     <td>${booking.booking_id}</td>
