@@ -53,7 +53,6 @@ npm install
      database: 'pandaRestaurant'
    }
    ```
-   Note: This file is gitignored for security
 
    - Run the database setup script:
    ```bash
