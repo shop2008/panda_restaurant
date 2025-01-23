@@ -43,8 +43,8 @@ cd pandarestaurant
 npm install
 ```
 
-1. Configure the database:
-   - Open `utils/database.js` and update the MySQL connection details:
+## Configure the database
+   1. Open `utils/database.js` and update the MySQL connection details:
    ```javascript
    {
      host: 'localhost',
@@ -60,9 +60,9 @@ npm install
    ```
    This will create the database and required tables for the application.
 
-2. Start the development server:
-```bash
-npm run start
-```
+   2. Start the development server:
+   ```bash
+   npm run start
+   ```
 
-The application will be available at `http://localhost:3000`
+   The application will be available at `http://localhost:3000`
