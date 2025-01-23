@@ -1,5 +1,7 @@
 const BaseController = require('./BaseController');
 const BookingInfo = require('../models/BookingModel');
+const ViewController = require('./viewController');
+
 
 class SearchController extends BaseController {
   constructor() {
@@ -13,14 +15,21 @@ class SearchController extends BaseController {
       const allDataRows = await BookingInfo.filterByGuestName(options.guestName);
       console.log("=== Call render method in searchController ========")
       console.log(allDataRows)
+
+      console.log("=== Call view controller for making html tags of a reseravtion table ========")
+      const htmlContent = await ViewController.createSearchResultTable(allDataRows);
+      console.log(htmlContent);
       console.log("=====================================================")
 
       super.render(res, view, {
-        confirmationData: allDataRows,
+        ViewContent: htmlContent,
         pageTitle: 'All Reservations',
         path: '/reservationsearch',
-        usingSearchFunction: false
+        confirmationData: allDataRows,
+        usingSearchFunction: false,
+        keywords: options.guestName
       });
+
     } catch (error) {
       this.handleError(error, null, res, null);
     }

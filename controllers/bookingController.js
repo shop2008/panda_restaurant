@@ -1,6 +1,6 @@
 const BaseController = require('./BaseController');
 const BookingInfo = require('../models/BookingModel');
-const path = require('../utils/path');
+const ViewController = require('./viewController');
 
 class BookingController extends BaseController {
   constructor() {
@@ -20,20 +20,27 @@ class BookingController extends BaseController {
 
       console.log("=== Call render method in bookingController ========")
       console.log(allDataRows)
+
+      console.log("=== Call view controller for making html tags of a reseravtion table ========")
+      const htmlContent = await ViewController.createSearchResultTable(allDataRows);
+      console.log(htmlContent);
       console.log("=====================================================")
 
       // Ensure options are correctly used and structured
       super.render(res, view, {
+        ViewContent: htmlContent,
         confirmationData: allDataRows,
         pageTitle: 'All Reservations',
         path: options.path,
-        usingSearchFunction: false
+        usingSearchFunction: false,
+        keywords: ''
       });
 
     } catch (error) {
       this.handleError(error, null, res, null);
     }
   }
+
 
   async getAllBookings(req, res, next) {
     try {
@@ -44,6 +51,7 @@ class BookingController extends BaseController {
       this.handleError(error, req, res, next);
     }
   }
+
 
   // Polymorphism
   handleError(error, req, res, next) {

@@ -24,13 +24,13 @@
 														<b style="float: left; margin-left: 6px;">Search by Guest
 															Name</b>
 														<div class="input-field col s12">
-															<input type="text" class="validate" id="guestName"
+															<input type="text" class="validate" id="guestName" placeholder="<%= keywords %>"
 																name="guestName">
 															<label>Enter guest name...</label>
 														</div>
 														<div class="input-field col s12">
 															<button type="submit" class="btn" style="margin-top: 5px;">
-																<i class="material-icons">search</i>
+																<i class="material-icons" >search</i>
 																Search
 															</button>
 														</div>
@@ -47,8 +47,7 @@
 									</div>
 								</div>
 							</div>
-							<% if(typeof confirmationData !=='undefined' && confirmationData !==null ) { %>
-								<% if (confirmationData.length> 0) { %>
+							<% if(typeof ViewContent !=='undefined' && ViewContent !==null ) { %>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="head-typo typo-com" style="overflow-x: scroll;">
@@ -67,57 +66,16 @@
 															<th>Special Requests</th>
 															<th>Status</th>
 														</tr>
-													</thead>
-													<tbody>
-														<% confirmationData.forEach(function(booking) { %>
-															<tr>
-																<td>
-																	<%= booking.booking_id %>
-																</td>
-																<td>
-																	<%= booking.first_name %>
-																		<%= booking.last_name %>
-																</td>
-																<td>
-																	<%= booking.email %>
-																</td>
-																<td>
-																	<%= booking.phone %>
-																</td>
-																<td>
-																	<%= booking.number_of_guests %>
-																</td>
-																<td>
-																	<%= booking.date.toLocaleDateString() %>
-																</td>
-																<td>
-																	<%= booking.time %>
-																</td>
-																<td>
-																	<%= booking.table_type %>
-																</td>
-																<td>
-																	<%= booking.special_requests %>
-																</td>
-																<td>
-																	<%= booking.status %>
-																</td>
-															</tr>
-															<% }); %>
-													</tbody>
+													</thead> 
+													<!-- the area for table body -->
+													 <tbody>
+															<%- ViewContent %>
+													 </tbody>
+													<!-- end -->
 												</table>
 											</div>
 										</div>
 									</div>
-									<% } else { %>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="alert alert-info">
-													No reservations found matching your search criteria.
-												</div>
-											</div>
-										</div>
-										<% } %>
 											<% } %>
 						</div>
 					</div>
