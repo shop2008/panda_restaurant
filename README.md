@@ -43,16 +43,25 @@ cd pandarestaurant
 npm install
 ```
 
+# Environment Configuration
+
+1. Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+2. Update the `.env` file with your configuration:
+```env
+JWT_SECRET=your_jwt_secret
+DB_HOST=your_db_host
+DB_USER=your_db_user
+DB_PASS=your_db_password
+DB_NAME=your_db_name
+```
+
 ## Configure the database
-   1. Open `utils/database.js` and update the MySQL connection details:
-   ```javascript
-   {
-     host: 'localhost',
-     user: 'your_username',
-     password: 'your_password',
-     database: 'pandaRestaurant'
-   }
-   ```
+  
 
    - Run the database setup script:
    ```bash
@@ -60,7 +69,7 @@ npm install
    ```
    This will create the database and required tables for the application.
 
-   2. Start the development server:
+   - Start the development server:
    ```bash
    npm run start
    ```

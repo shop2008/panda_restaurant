@@ -20,7 +20,10 @@ class AuthController {
   async postLogin(req, res) {
     try {
       const { email, password } = req.body;
+      console.log('Login attempt:', { email, password });
+      // Get user from database
       const user = await UserModel.findByEmail(email);
+      console.log('User found:', user);
       if (!user) {
         return res.render('auth/login', {
           pageTitle: 'Login',
@@ -28,7 +31,12 @@ class AuthController {
         });
       }
 
-      const isValidPassword = await bcrypt.compare(password, user.password);
+      // Verify password
+      const isValidPassword = await UserModel.validatePassword(
+        password,
+        user.password
+      );
+      console.log('Password validation result:', isValidPassword);
       if (!isValidPassword) {
         return res.render('auth/login', {
           pageTitle: 'Login',
@@ -36,6 +44,7 @@ class AuthController {
         });
       }
 
+      // Create token
       const token = jwt.sign(
         {
           userId: user.id,
@@ -45,17 +54,24 @@ class AuthController {
           role: user.role,
         },
         process.env.JWT_SECRET,
-        { expiresIn: '1h' }
+        { expiresIn: '24h' }
       );
 
+      // Set cookie
       res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 3600000, // 1 hour
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
       });
-      res.redirect('/');
+
+      // Redirect based on role
+      if (user.role === 'admin') {
+        res.redirect('/getAllBookings');
+      } else {
+        res.redirect('/');
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Login error:', error);
       res.status(500).render('auth/login', {
         pageTitle: 'Login',
         errorMessage: 'An error occurred during login',

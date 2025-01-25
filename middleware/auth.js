@@ -26,24 +26,34 @@ const isAdmin = (req, res, next) => {
 };
 
 const setUser = (req, res, next) => {
-  res.locals.user = null;
-  console.log('Checking token...');
+  const token = req.cookies.token;
 
-  try {
-    const token = req.cookies.token;
-    if (token) {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      res.locals.user = decoded;
-      console.log('User set in locals:', res.locals.user);
-    } else {
-      console.log('No token found');
-    }
-  } catch (error) {
-    console.log('Token verification failed:', error.message);
-    res.clearCookie('token');
+  if (!token) {
+    res.locals.user = null;
+    return next();
   }
 
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.locals.user = {
+      id: decoded.userId,
+      email: decoded.email,
+      firstName: decoded.firstName,
+      lastName: decoded.lastName,
+      role: decoded.role,
+    };
+  } catch (error) {
+    res.locals.user = null;
+    res.clearCookie('token');
+  }
   next();
 };
 
-module.exports = { isAuth, isAdmin, setUser };
+const requireAuth = (req, res, next) => {
+  if (!res.locals.user) {
+    return res.redirect('/login');
+  }
+  next();
+};
+
+module.exports = { isAuth, isAdmin, setUser, requireAuth };

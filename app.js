@@ -22,9 +22,13 @@ server.use(express.static(path.join(__dirname, 'public')));
 // Add cookie parser middleware
 server.use(cookieParser());
 
-// Add after cookieParser and before routes
-const { setUser } = require('./middleware/auth');
+// Add after cookieParser middleware
+const { setUser, requireAuth } = require('./middleware/auth');
 server.use(setUser);
+
+// Protect admin routes
+server.use('/getAllBookings', requireAuth);
+server.use('/menu/manage', requireAuth);
 
 // Add authentication routes BEFORE the error handler
 const authRoutes = require('./routes/auth');

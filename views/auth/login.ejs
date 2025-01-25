@@ -8,9 +8,9 @@
                     <div class="row">
                         <div class="col-md-6 offset-md-3">
                             <h2>Login</h2>
-                            <% if (locals.error) { %>
+                            <% if (errorMessage) { %>
                                 <div class="alert alert-danger">
-                                    <%= error %>
+                                    <%= errorMessage %>
                                 </div>
                                 <% } %>
                                     <form action="/login" method="POST">
