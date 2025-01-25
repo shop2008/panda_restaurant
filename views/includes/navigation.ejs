@@ -1,10 +1,10 @@
 <header>
-    	<section>
+	<section>
 		<div class="mm">
 			<div class="mm-inn">
 				<div class="mm-logo">
-						<a href="/"><img style="width: 64px; height: 64px;" src="images/logo1.png" alt="" />
-						</a> <span style="color: white; font-weight: 800; font-size: 1.7rem;">&nbsp;Panda Restaurant</span>
+					<a href="/"><img style="width: 64px; height: 64px;" src="images/logo1.png" alt="" />
+					</a> <span style="color: white; font-weight: 800; font-size: 1.7rem;">&nbsp;Panda Restaurant</span>
 				</div>
 				<div class="mm-icon"><span><i class="fa fa-bars show-menu" aria-hidden="true"></i></span>
 				</div>
@@ -12,12 +12,27 @@
 					<div class="mm-close"><span><i class="fa fa-times hide-menu" aria-hidden="true"></i></span>
 					</div>
 					<ul>
-						<li><a href="/">Home</a>
-						</li>
-						<li><a href="/aboutus">About Us</a>
-						</li>
-						<li><a href="/contactus">Contact Us</a>
-						</li>
+						<% console.log('Navigation rendering, user:', locals.user); %>
+							<li><a href="/">Home</a></li>
+							<% if (locals.user && locals.user.role==='admin' ) { %>
+								<li><a href="/getAllBookings">Reservation Search</a></li>
+								<li><a href="/menu/manage">Manage Menu</a></li>
+								<% } else { %>
+									<li><a href="/bookingform">Booking</a></li>
+									<li><a href="/menu">Menu</a></li>
+									<% } %>
+										<% if (locals.user) { %>
+											<li>
+												<form action="/logout" method="POST" style="display: inline;">
+													<button type="submit" class="btn-link waves-effect waves-light">
+														<i class="fa fa-sign-out"></i> Logout
+													</button>
+												</form>
+											</li>
+											<% } else { %>
+												<li><a href="/login">Login</a></li>
+												<li><a href="/register">Register</a></li>
+												<% } %>
 					</ul>
 				</div>
 			</div>
@@ -29,22 +44,34 @@
 		<div class="menu-section">
 			<div class="container">
 				<div class="row">
-						<div class="logo">
-						<a href="/"><img style="width: 38px; height: 38px; margin: 10px;" src="images/logo1.png" alt="" />
-						</a> <span style="color: white; width: 100%; font-weight: 800; font-size: 1.7rem;">Panda Restaurant</span>
+					<div class="logo">
+						<a href="/"><img style="width: 38px; height: 38px; margin: 10px;" src="images/logo1.png"
+								alt="" />
+						</a> <span style="color: white; width: 100%; font-weight: 800; font-size: 1.7rem;">Panda
+							Restaurant</span>
 					</div>
 					<div class="top-bar">
 						<ul>
-							<li><a href="/">Home</a>
-							</li>
-							<li><a href="/getAllBookings">Reservation Search</a>
-							</li>
-							<li><a href="/bookingform">Booking</a>
-							</li>
-							<li><a href="/aboutus">About Us</a>
-							</li>
-							<li><a href="/contactus">Contact Us</a>
-							</li>
+							<li><a href="/">Home</a></li>
+							<% if (locals.user && locals.user.role==='admin' ) { %>
+								<li><a href="/getAllBookings">Reservation Search</a></li>
+								<li><a href="/menu/manage">Manage Menu</a></li>
+								<% } else { %>
+									<li><a href="/bookingform">Booking</a></li>
+									<li><a href="/menu">Menu</a></li>
+									<% } %>
+										<% if (locals.user) { %>
+											<li>
+												<form action="/logout" method="POST" style="display: inline;">
+													<button type="submit" class="btn-link waves-effect waves-light">
+														<i class="fa fa-sign-out"></i> Logout
+													</button>
+												</form>
+											</li>
+											<% } else { %>
+												<li><a href="/login">Login</a></li>
+												<li><a href="/register">Register</a></li>
+												<% } %>
 						</ul>
 					</div>
 				</div>
@@ -63,5 +90,5 @@
 			</div>
 		</div>
 		<!--TOP SECTION-->
-    </section>
+	</section>
 </header>

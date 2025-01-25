@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('includes/navigation.ejs') %>
+            <main>
+                <div class="inn-body-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="page-head">
+                                <h2>Our Menu</h2>
+                                <div class="head-title">
+                                    <div class="hl-1"></div>
+                                    <div class="hl-2"></div>
+                                    <div class="hl-3"></div>
+                                </div>
+                                <p>Discover our delicious offerings</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <% menuItems.forEach(item=> { %>
+                                <div class="col s12 m6 l4">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <span class="card-title truncate">
+                                                <%= item.name %>
+                                            </span>
+                                            <p class="price">$<%= item.price %>
+                                            </p>
+                                        </div>
+                                        <% if (locals.user) { %>
+                                            <div class="card-action">
+                                                <a href="/bookingform" class="waves-effect waves-light btn">
+                                                    <i class="material-icons left">restaurant</i>Order Now
+                                                </a>
+                                            </div>
+                                            <% } else { %>
+                                                <div class="card-action">
+                                                    <a href="/login" class="waves-effect waves-light btn">
+                                                        <i class="material-icons left">login</i>Login to Order
+                                                    </a>
+                                                </div>
+                                                <% } %>
+                                    </div>
+                                </div>
+                                <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%- include('includes/end.ejs') %>
+    </body>
+
+    </html>
