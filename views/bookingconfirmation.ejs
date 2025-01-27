@@ -41,11 +41,11 @@
 										<th>Status</th>
 									</tr>
 								</thead>
-									<!-- the area for table body -->
-													 <tbody>
-															<%- ViewContent %>
-													 </tbody>
-													<!-- end -->
+								<!-- the area for table body -->
+								<tbody>
+									<%- ViewContent.replace(/null/g, '' ) %>
+								</tbody>
+								<!-- end -->
 							</table>
 							<% } else { %>
 								<h3>No Booking Data!</h3>
