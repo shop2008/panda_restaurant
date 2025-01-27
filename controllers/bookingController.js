@@ -1,4 +1,4 @@
-const BaseController = require('./BaseController');
+const BaseController = require('./baseController');
 const BookingInfo = require('../models/BookingModel');
 const ViewController = require('./viewController');
 
@@ -18,13 +18,17 @@ class BookingController extends BaseController {
         allDataRows = await BookingInfo.fetchById(options.BookingId);
       }
 
-      console.log("=== Call render method in bookingController ========")
-      console.log(allDataRows)
+      console.log('=== Call render method in bookingController ========');
+      console.log(allDataRows);
 
-      console.log("=== Call view controller for making html tags of a reseravtion table ========")
-      const htmlContent = await ViewController.createSearchResultTable(allDataRows);
+      console.log(
+        '=== Call view controller for making html tags of a reseravtion table ========'
+      );
+      const htmlContent = await ViewController.createSearchResultTable(
+        allDataRows
+      );
       console.log(htmlContent);
-      console.log("=====================================================")
+      console.log('=====================================================');
 
       // Ensure options are correctly used and structured
       super.render(res, view, {
@@ -33,25 +37,24 @@ class BookingController extends BaseController {
         pageTitle: 'All Reservations',
         path: options.path,
         usingSearchFunction: false,
-        keywords: ''
+        keywords: '',
       });
-
     } catch (error) {
       this.handleError(error, null, res, null);
     }
   }
 
-
   async getAllBookings(req, res, next) {
     try {
       // call render method in this sub-class
-      this.render(res, 'reservationsearch', { usingSearchByID: false, path: '/reservationsearch' });
-
+      this.render(res, 'reservationsearch', {
+        usingSearchByID: false,
+        path: '/reservationsearch',
+      });
     } catch (error) {
       this.handleError(error, req, res, next);
     }
   }
-
 
   // Polymorphism
   handleError(error, req, res, next) {
@@ -98,9 +101,12 @@ class BookingController extends BaseController {
         throw new Error('Failed to save booking');
       }
 
-      // go to confirmation page 
-      this.render(res, 'bookingconfirmation', { usingSearchByID: true, BookingId: bookingId, path: 'bookingconfirmation' });
-
+      // go to confirmation page
+      this.render(res, 'bookingconfirmation', {
+        usingSearchByID: true,
+        BookingId: bookingId,
+        path: 'bookingconfirmation',
+      });
     } catch (error) {
       this.handleError(error, req, res, next);
     }

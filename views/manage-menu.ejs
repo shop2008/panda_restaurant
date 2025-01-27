@@ -78,7 +78,7 @@
                                         <p class="price">$<%= item.price %>
                                         </p>
                                         <div class="card-action">
-                                            <a href="#" onclick="toggleEdit('<%= item.id %>')">
+                                            <a href="#" onclick="toggleEdit('<%= item.id %>', event)">
                                                 <i class="material-icons left">edit</i>Edit
                                             </a>
                                             <form action="/menu/delete/<%= item.id %>" method="POST"
@@ -107,7 +107,7 @@
                                                 <button type="submit" class="waves-effect waves-light btn">
                                                     <i class="material-icons left">save</i>Save
                                                 </button>
-                                                <a href="#" onclick="toggleEdit('<%= item.id %>')"
+                                                <a href="#" onclick="toggleEdit('<%= item.id %>', event)"
                                                     class="btn-flat">Cancel</a>
                                             </div>
                                         </form>
@@ -221,7 +221,10 @@
                     <%- include('includes/end.ejs') %>
 
                         <script>
-                            function toggleEdit(id) {
+                            function toggleEdit(id, event) {
+                                if (event) {
+                                    event.preventDefault();
+                                }
                                 const viewEl = document.getElementById(`view-${id}`);
                                 const editEl = document.getElementById(`edit-${id}`);
                                 viewEl.classList.toggle('hide');

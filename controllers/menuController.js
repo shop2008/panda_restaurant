@@ -1,4 +1,4 @@
-const BaseController = require('./BaseController');
+const BaseController = require('./baseController');
 const MenuModel = require('../models/MenuModel');
 
 class MenuController extends BaseController {
@@ -32,8 +32,16 @@ class MenuController extends BaseController {
     try {
       console.log(req.body);
       const validationRules = {
-        name: { required: true },
-        price: { required: true },
+        name: {
+          required: true,
+          minLength: 2,
+          maxLength: 50,
+        },
+        price: {
+          required: true,
+          type: 'number',
+          min: 0,
+        },
       };
 
       const validationErrors = this.validate(req.body, validationRules);
@@ -41,21 +49,17 @@ class MenuController extends BaseController {
         return this.render(res, 'manage-menu', { errors: validationErrors });
       }
 
-      // Convert price to number and validate
-      const price = parseFloat(req.body.price);
-      if (isNaN(price) || price <= 0) {
-        return this.render(res, 'manage-menu', {
-          errors: ['Price must be a valid positive number'],
-        });
-      }
-
       const menuItem = new MenuModel({
         name: req.body.name.trim(),
-        price: price,
+        price: parseFloat(req.body.price),
       });
 
       await menuItem.save();
-      res.redirect('/menu/manage');
+      this.redirectWithMessage(
+        res,
+        '/menu/manage',
+        'Menu item added successfully'
+      );
     } catch (error) {
       this.handleError(error, req, res);
     }
